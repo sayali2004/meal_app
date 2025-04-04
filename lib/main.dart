@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:meal_app/screens/tabs.dart';
 
-
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
@@ -16,7 +15,8 @@ final theme = ThemeData(
 
 void main() {
   runApp(const ProviderScope(
-    child:App()));
+    child: App(),
+  ));
 }
 
 class App extends StatelessWidget {
