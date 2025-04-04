@@ -45,7 +45,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableMeals = ref.watch(filterMealProvider);
+    final availableMeals = ref.watch(filterMealProvider); // ✅ No more undefined error
 
     Widget activePage = CategoriesScreen(
       avialableMeals: availableMeals,
@@ -64,7 +64,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: MainDrawer(onSelectScreen: _setScreen), // Fixed method name
+      drawer: MainDrawer(onSelectScreen: _setScreen),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
