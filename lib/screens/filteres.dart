@@ -32,11 +32,11 @@ class FilterScreen extends ConsumerWidget
                 ref.read(filterProvider.notifier).setFilter(Filter.glutenfree,isChecked);
               },
               title: Text('Gluten-Free',style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               ),
               subtitle: Text('Only includes Gluten-Free Meals',style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,),
+                color: Theme.of(context).colorScheme.onSurface,),
               ),
               activeColor:Theme.of(context).colorScheme.tertiary,
               contentPadding: EdgeInsets.only(left: 34,right: 24,),
@@ -48,11 +48,11 @@ class FilterScreen extends ConsumerWidget
                 ref.read(filterProvider.notifier).setFilter(Filter.lactosefree,isChecked);
               },
               title: Text('Lactose-Free',style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               ),
               subtitle: Text('Only includes Lactose-Free Meals',style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,),
+                color: Theme.of(context).colorScheme.onSurface,),
               ),
               activeColor:Theme.of(context).colorScheme.tertiary,
               contentPadding: EdgeInsets.only(left: 34,right: 24,),
@@ -64,11 +64,11 @@ class FilterScreen extends ConsumerWidget
                 ref.read(filterProvider.notifier).setFilter(Filter.vegeterian,isChecked);
               },
               title: Text('Vegeterian',style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               ),
               subtitle: Text('Only includes Vegeterian Meals',style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,),
+                color: Theme.of(context).colorScheme.onSurface,),
               ),
               activeColor:Theme.of(context).colorScheme.tertiary,
               contentPadding: EdgeInsets.only(left: 34,right: 24,),
@@ -80,11 +80,11 @@ class FilterScreen extends ConsumerWidget
                 ref.read(filterProvider.notifier).setFilter(Filter.vegan,isChecked);
               },
               title: Text('Vegan',style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               ),
               subtitle: Text('Only includes Vegan Meals',style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,),
+                color: Theme.of(context).colorScheme.onSurface,),
               ),
               activeColor:Theme.of(context).colorScheme.tertiary,
               contentPadding: EdgeInsets.only(left: 34,right: 24,),
