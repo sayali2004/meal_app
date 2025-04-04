@@ -3,18 +3,18 @@ import 'package:meal_app/providers/meals_provider.dart';
 import 'package:meal_app/models/meal.dart';
 
 enum Filter {
-  glutenfree,
-  lactosefree,
-  vegeterian,
+  glutenFree,
+  lactoseFree,
+  vegetarian,
   vegan,
 }
 
 class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
   FiltersNotifier()
       : super({
-          Filter.glutenfree: false,
-          Filter.lactosefree: false,
-          Filter.vegeterian: false,
+          Filter.glutenFree: false,
+          Filter.lactoseFree: false,
+          Filter.vegetarian: false,
           Filter.vegan: false,
         });
 
@@ -34,21 +34,21 @@ final filterProvider =
     StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>(
         (ref) => FiltersNotifier());
 
-final filterMealProvider = Provider<List<Meal>>((ref) {
-  final meals = ref.watch(mealsProvider) ?? []; // Ensure mealsProvider is not null
+final filteredMealProvider = Provider<List<Meal>>((ref) {
+  final meals = ref.watch(mealsProvider); // Assuming mealsProvider always provides a list
   final activeFilters = ref.watch(filterProvider);
 
   return meals.where((meal) {
-    if (activeFilters[Filter.glutenfree]! && !meal.isGlutenFree) {
+    if (activeFilters[Filter.glutenFree] == true && !meal.isGlutenFree) {
       return false;
     }
-    if (activeFilters[Filter.lactosefree]! && !meal.isLactoseFree) {
+    if (activeFilters[Filter.lactoseFree] == true && !meal.isLactoseFree) {
       return false;
     }
-    if (activeFilters[Filter.vegeterian]! && !meal.isVegetarian) {
+    if (activeFilters[Filter.vegetarian] == true && !meal.isVegetarian) {
       return false;
     }
-    if (activeFilters[Filter.vegan]! && !meal.isVegan) {
+    if (activeFilters[Filter.vegan] == true && !meal.isVegan) {
       return false;
     }
     return true;
