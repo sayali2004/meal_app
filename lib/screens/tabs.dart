@@ -10,9 +10,9 @@ import 'package:meal_app/widgets/main_drawer.dart';
 import 'package:meal_app/providers/filters_provider.dart';
 
 const kInitialFilters = {
-  Filter.glutenfree: false,
-  Filter.lactosefree: false,
-  Filter.vegeterian: false,
+  Filter.glutenFree: false,
+  Filter.lactoseFree: false,
+  Filter.vegetarian: false,
   Filter.vegan: false,
 };
 
@@ -64,7 +64,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: MainDrawer(onselectScreen: _setScreen),
+      drawer: MainDrawer(onSelectScreen: _setScreen), // Fixed method name
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
