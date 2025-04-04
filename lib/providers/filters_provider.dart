@@ -35,22 +35,14 @@ final filterProvider =
         (ref) => FiltersNotifier());
 
 final filteredMealProvider = Provider<List<Meal>>((ref) {
-  final meals = ref.watch(mealsProvider); // Assuming mealsProvider always provides a list
+  final meals = ref.watch(mealsProvider);
   final activeFilters = ref.watch(filterProvider);
 
   return meals.where((meal) {
-    if (activeFilters[Filter.glutenFree] == true && !meal.isGlutenFree) {
-      return false;
-    }
-    if (activeFilters[Filter.lactoseFree] == true && !meal.isLactoseFree) {
-      return false;
-    }
-    if (activeFilters[Filter.vegetarian] == true && !meal.isVegetarian) {
-      return false;
-    }
-    if (activeFilters[Filter.vegan] == true && !meal.isVegan) {
-      return false;
-    }
+    if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) return false;
+    if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) return false;
+    if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) return false;
+    if (activeFilters[Filter.vegan]! && !meal.isVegan) return false;
     return true;
   }).toList();
 });
