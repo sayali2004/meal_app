@@ -34,7 +34,7 @@ final filterProvider =
     StateNotifierProvider<FiltersNotifier, Map<Filter, bool>>(
         (ref) => FiltersNotifier());
 
-final filteredMealProvider = Provider<List<Meal>>((ref) {
+final filteredMealProvider = Provider<List<Meal>>((ref) { // ✅ Corrected provider name
   final meals = ref.watch(mealsProvider);
   final activeFilters = ref.watch(filterProvider);
 
