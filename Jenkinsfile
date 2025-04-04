@@ -4,7 +4,7 @@ pipeline {
     environment {
         FLUTTER_HOME = "/opt/flutter"
         PATH = "${FLUTTER_HOME}/bin:${env.PATH}"
-        JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64" // Ensure Java is available
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64" // Ensure Java is available
         MY_ENV_VAR = "Custom Value for Flutter Build"
     }
 
