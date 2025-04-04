@@ -1,54 +1,73 @@
 pipeline {
-    agent any  // Runs the pipeline on any available agent
+    agent any
 
     environment {
-        // Set the path to the Flutter SDK (adjust this path based on your system)
-        FLUTTER_HOME = '/path/to/flutter'  // Update with your Flutter SDK path
-        PATH = "${env.PATH}:${env.FLUTTER_HOME}/bin"
+        FLUTTER_HOME = "${HOME}/flutter"
+        PATH = "${FLUTTER_HOME}/bin:${env.PATH}"
+        MY_ENV_VAR = "Custom Value for Flutter Build"
     }
 
     stages {
-        // Checkout the repository
         stage('Checkout') {
             steps {
-                // Pull the code from the Git repository
-                git url: 'https://github.com/username/flutter-app.git', credentialsId: 'your-credentials-id'
-            }
-        }
-
-        // Install Flutter dependencies
-        stage('Install Dependencies') {
-            steps {
                 script {
-                    // Ensure that Flutter dependencies are properly installed
-                    sh 'flutter doctor'
-                    sh 'flutter pub get'
+                    def gitRepoUrl = 'https://github.com/sayali2004/meal_app.git'
+                    checkout([$class: 'GitSCM', 
+                        branches: [[name: '*/main']], // change to '*/master' if your repo uses master
+                        userRemoteConfigs: [[url: gitRepoUrl]],
+                        extensions: [[$class: 'CleanBeforeCheckout']]
+                    ])
                 }
             }
         }
 
-        // Build the Flutter APK (for Android)
+        stage('Flutter Version Check') {
+            steps {
+                sh 'flutter --version'
+            }
+        }
+
+        stage('Get Dependencies') {
+            steps {
+                sh 'flutter pub get'
+            }
+        }
+
+        stage('Analyze Code') {
+            steps {
+                sh 'flutter analyze'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'flutter test'
+            }
+        }
+
         stage('Build APK') {
             steps {
-                script {
-                    // Build the APK in release mode
-                    sh 'flutter build apk --release'
-                }
+                sh 'flutter build apk --release'
             }
         }
 
-        // Archive the built APK file as a Jenkins artifact
-        stage('Archive APK') {
+        stage('Deploy / Output') {
             steps {
-                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/*.apk', allowEmptyArchive: true
+                sh '''
+                echo "APK Build Complete!"
+                echo "ENV VAR: $MY_ENV_VAR"
+                ls build/app/outputs/flutter-apk/
+                '''
             }
         }
     }
 
     post {
-        // Clean up workspace after build
-        always {
-            cleanWs()
+        success {
+            echo '✅ Flutter build pipeline completed successfully!'
+        }
+        failure {
+            echo '❌ Flutter build pipeline failed!'
         }
     }
 }
