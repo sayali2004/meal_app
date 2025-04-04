@@ -18,7 +18,7 @@ class MainDrawer extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   theme.colorScheme.primaryContainer,
-                  theme.colorScheme.primaryContainer.withOpacity(0.8),
+                  theme.colorScheme.primaryContainer.withAlpha(204), // Fixed opacity
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -45,12 +45,12 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(
               Icons.restaurant,
               size: 26,
-              color: theme.colorScheme.onSurface, // Updated from onBackground
+              color: theme.colorScheme.onSurface, 
             ),
             title: Text(
               'Meals',
               style: theme.textTheme.titleSmall!.copyWith(
-                color: theme.colorScheme.onSurface, // Updated from onBackground
+                color: theme.colorScheme.onSurface, 
                 fontSize: 24,
               ),
             ),
@@ -62,12 +62,12 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(
               Icons.settings,
               size: 26,
-              color: theme.colorScheme.onSurface, // Updated from onBackground
+              color: theme.colorScheme.onSurface, 
             ),
             title: Text(
               'Filter Screen',
               style: theme.textTheme.titleSmall!.copyWith(
-                color: theme.colorScheme.onSurface, // Updated from onBackground
+                color: theme.colorScheme.onSurface, 
                 fontSize: 24,
               ),
             ),
