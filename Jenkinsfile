@@ -7,6 +7,11 @@ pipeline {
         ANDROID_SDK_ROOT = "/opt/android-sdk"
         PATH = "${FLUTTER_HOME}/bin:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${env.PATH}"
         MY_ENV_VAR = "Custom Value for Flutter Build"
+        GRADLE_OPTS = "-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx2048m"
+    }
+
+    options {
+        timeout(time: 20, unit: 'MINUTES')
     }
 
     stages {
@@ -72,7 +77,8 @@ pipeline {
             steps {
                 sh '''
                 echo "📦 Building Flutter APK..."
-                flutter build apk --release || { echo "❌ APK build failed!"; exit 1; }
+                export ORG_GRADLE_PROJECT_flutterBuildMode=release
+                flutter build apk --release -v || { echo "❌ APK build failed!"; exit 1; }
                 '''
             }
         }
