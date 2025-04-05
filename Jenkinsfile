@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         FLUTTER_HOME = "/opt/flutter"
-        ANDROID_HOME = "/usr/lib/android-sdk"
+        ANDROID_HOME = "${HOME}/android-sdk"
         PATH = "${FLUTTER_HOME}/bin:${ANDROID_HOME}/cmdline-tools/latest/bin:${env.PATH}"
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
         MY_ENV_VAR = "Custom Value for Flutter Build"
@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     def gitRepoUrl = 'https://github.com/sayali2004/meal_app.git'
-                    checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/main']], // Change if repo uses 'master'
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: '*/main']],
                         userRemoteConfigs: [[url: gitRepoUrl]],
                         extensions: [[$class: 'CleanBeforeCheckout']]
                     ])
@@ -28,6 +28,25 @@ pipeline {
                 sh '''
                 echo "🔍 Checking Flutter version..."
                 flutter --version || { echo "❌ Flutter not found!"; exit 1; }
+                '''
+            }
+        }
+
+        stage('Install Android SDK Command Line Tools') {
+            steps {
+                sh '''
+                echo "🛠️ Checking for sdkmanager..."
+                if ! command -v sdkmanager > /dev/null; then
+                    echo "📦 Installing Android Command Line Tools..."
+                    mkdir -p ${ANDROID_HOME}/cmdline-tools
+                    cd ${ANDROID_HOME}/cmdline-tools
+                    wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O tools.zip
+                    unzip -q tools.zip -d latest
+                    rm tools.zip
+                    echo "✅ Android Command Line Tools installed."
+                else
+                    echo "✅ sdkmanager already available."
+                fi
                 '''
             }
         }
