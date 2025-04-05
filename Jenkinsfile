@@ -3,8 +3,9 @@ pipeline {
 
     environment {
         FLUTTER_HOME = "/opt/flutter"
-        PATH = "${FLUTTER_HOME}/bin:${env.PATH}"
-        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64" // Ensure Java is available
+        ANDROID_HOME = "/usr/lib/android-sdk"
+        PATH = "${FLUTTER_HOME}/bin:${ANDROID_HOME}/cmdline-tools/latest/bin:${env.PATH}"
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
         MY_ENV_VAR = "Custom Value for Flutter Build"
     }
 
@@ -27,6 +28,15 @@ pipeline {
                 sh '''
                 echo "🔍 Checking Flutter version..."
                 flutter --version || { echo "❌ Flutter not found!"; exit 1; }
+                '''
+            }
+        }
+
+        stage('Accept Android Licenses') {
+            steps {
+                sh '''
+                echo "📄 Accepting Android SDK Licenses..."
+                yes | sdkmanager --licenses || { echo "❌ Failed to accept licenses!"; exit 1; }
                 '''
             }
         }
