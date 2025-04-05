@@ -5,7 +5,7 @@ pipeline {
         FLUTTER_HOME = "/opt/flutter"
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
         ANDROID_SDK_ROOT = "/home/sayalichougule/android-sdk"
-        PATH = "${FLUTTER_HOME}/bin:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${env.PATH}"
+        PATH = "${FLUTTER_HOME}/bin:${ANDROID_SDK_ROOT}/cmdline-tools/latest/cmdline-tools/bin:${env.PATH}"
         MY_ENV_VAR = "Custom Value for Flutter Build"
     }
 
