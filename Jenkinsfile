@@ -83,15 +83,15 @@ pipeline {
         //     }
         // }
 
-        stage('Deploy / Output') {
-            steps {
-                sh '''
-                echo "🚀 Build complete! Checking output..."
-                echo "ENV VAR: $MY_ENV_VAR"
-                ls -lah build/app/outputs/flutter-apk/ || { echo "❌ APK output not found!"; exit 1; }
-                '''
-            }
-        }
+        // stage('Deploy / Output') {
+        //     steps {
+        //         sh '''
+        //         echo "🚀 Build complete! Checking output..."
+        //         echo "ENV VAR: $MY_ENV_VAR"
+        //         ls -lah build/app/outputs/flutter-apk/ || { echo "❌ APK output not found!"; exit 1; }
+        //         '''
+        //     }
+        // }
     }
 
     post {
