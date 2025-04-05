@@ -73,15 +73,15 @@ pipeline {
             }
         }
 
-        stage('Build APK') {
-            steps {
-                sh '''
-                echo "📦 Building Flutter APK..."
-                export ORG_GRADLE_PROJECT_flutterBuildMode=release
-                flutter build apk --release -v || { echo "❌ APK build failed!"; exit 1; }
-                '''
-            }
-        }
+        // stage('Build APK') {
+        //     steps {
+        //         sh '''
+        //         echo "📦 Building Flutter APK..."
+        //         export ORG_GRADLE_PROJECT_flutterBuildMode=release
+        //         flutter build apk --release -v || { echo "❌ APK build failed!"; exit 1; }
+        //         '''
+        //     }
+        // }
 
         stage('Deploy / Output') {
             steps {
